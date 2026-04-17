@@ -1,315 +1,218 @@
 # AI Native Builder Consultant Skills
 
-> The skills marketplace for people **building** AI Native products — not just using them.
+> 专门为 AI Native 产品构建者设计的咨询系统 · 不只是用 AI，而是帮你 **建** AI 产品
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
-[![Author](https://img.shields.io/badge/Author-Medoc%20May-teal?style=flat-square)](https://github.com/MedocMay/ai-native-builder-consultant-skills)
+[![Skills](https://img.shields.io/badge/Skills-28-orange?style=flat-square)](#完整-skills-库一览)
+[![Version](https://img.shields.io/badge/Version-v3.0-purple?style=flat-square)](CONSULTING-WORKFLOW.md)
 
 ---
 
-## Start Here
+## 这是什么
 
-This repository is a **consulting system for AI Native product building**.
+一套完整的 AI Native 产品咨询系统，包含：
 
-It gives you three things:
+- **28 个 Skills** — 每个都是一份经过产业实践验证的决策框架
+- **完整 SOP** — 从场景分析到上线飞轮的全流程操作指南
+- **工作坊工具** — 伪需求识别清单、项目定义卡、PRD Lite 等即用模板
 
-- `Skills` for making hard product decisions
-- `Templates` for turning those decisions into client-ready deliverables
-- `Workflow` docs for running a full consulting engagement from positioning to launch and iteration
+覆盖的核心问题：
 
-If you're new here, use this order:
-
-1. Read [CONSULTING-WORKFLOW.md](CONSULTING-WORKFLOW.md)
-2. Skim [TERMINOLOGY.md](TERMINOLOGY.md)
-3. Start with `agent-boundary-design`
-4. Use the [`templates/`](templates/) folder to capture outputs as formal deliverables
-
-### Core Outputs
-
-By the end of a full engagement, you should have most of these artifacts:
-
-- `AI Positioning Statement`
-- `Agent Boundary Spec`
-- `SOUL.md`
-- `HITL Design Spec`
-- `Knowledge Architecture Decision`
-- `Trust-Autonomy Calibration Plan`
-- `Data Foundation Plan`
-- `Eval Plan + Production Review Protocol`
-- `Tech Stack Decision`
-- `Launch Risk Review`
-- `Iteration Flywheel Design`
+- 这个需求到底该不该用 AI？
+- 用大模型还是用小模型？什么时候大小模型连用？
+- Agent 的边界在哪里？Zone A/B/C 怎么划分？
+- SOUL 文件怎么写？HITL 怎么设计？
+- CV/OCR/时序/语音任务怎么落地？选 PaddleX 还是 PyTorch？
+- 上线前的检查清单？上线后的迭代飞轮？
 
 ---
 
-## Why This Repo Exists
+## 快速开始
 
-There are great Skills repos for *doing PM work with AI*. There are great Skills repos for *writing code with AI*.
+### 安装方式
 
-There is nothing for the person sitting in front of a blank whiteboard trying to answer: **"How do I actually design and build this AI Native thing?"**
-
-Not "how do I prompt better." Not "what's an LLM." Not "here's a PRD template."
-
-The hard questions. The ones that matter.
-
-- Where does my agent end and the human begin?
-- Should I use RAG or fine-tuning? How do I decide?
-- Why does my agent feel impressive in demos but break in production?
-- How do I design trust into an AI product, not just bolt it on?
-- What does "AI Native UX" actually mean in practice?
-
-These aren't questions you find answers to in a book. They're questions you answer by building, shipping, breaking things, and building again.
-
-This repo is the distillation of that process.
-
----
-
-## Who this is for
-
-**You're the right person if:**
-
-- You've decided to build an AI Native product and need to make real architectural decisions
-- You're a technical founder or PM who works directly on the product — not someone who delegates to "the AI team"
-- You want decision frameworks, not generic advice
-- You're comfortable with Claude Code, OpenClaw, or similar agent environments
-
-**You're not the right person if:**
-
-- You're looking for prompting tips for everyday tasks
-- You want templates to fill in
-- You haven't yet decided to build something — this repo assumes you're already building
-
----
-
-## What's inside
-
-Skills are organized into three layers, each building on the previous:
-
-### Layer 1 — Mental Models
-*The concepts you need before any decision makes sense.*
-
-| Skill | What it answers |
-|-------|----------------|
-| `ai-native-vs-ai-enhanced` | Is my product actually AI Native, or am I just adding a chatbot? |
-| `agent-loop-model` | What does an agent actually do, at the mechanical level? |
-| `llm-capability-boundaries` | What can I rely on the model for, and what can't I? |
-| `uncertainty-and-hallucination` | Why does my agent lie, and what do I do about it? |
-
-### Layer 2 — Design Decisions
-*The choices that determine whether your product works.*
-
-| Skill | What it answers |
-|-------|----------------|
-| **`agent-boundary-design`** ← start here | Where does my agent end? What should it own vs delegate? |
-| `system-prompt-engineering` | How do I write a system prompt that holds up in production? |
-| `knowledge-injection-strategy` | RAG, fine-tuning, or context engineering — how do I choose? |
-| `human-in-the-loop-design` | How do I design the human confirmation experience? |
-| `ai-native-ux-patterns` | What does AI Native UX look like beyond the chat box? |
-| `tech-stack-selection` | How do I choose a framework, model, and infrastructure? |
-| `trust-and-autonomy-tradeoff` | How much should my agent do vs ask? |
-
-### Layer 3 — Build Skills
-*The craft of actually building it well.*
-
-| Skill | What it answers |
-|-------|----------------|
-| `data-foundation` | Where does the data come from, how is it labeled, and how do we build an eval set? |
-| `agent-eval-framework` | How do I know if my agent is actually working? |
-| `multi-agent-orchestration` | How do I design agents that hand off to each other reliably? |
-| `launch-risk-review` | What do I check before putting this in front of real users? |
-| `iteration-flywheel` | How do I build the data → model → product feedback loop? |
-
----
-
-## Quick start
-
-This repository is published as a **portable skills library**. You can use it in three ways:
-
-### 1. Read and copy a single skill
-
-Open any `SKILL.md` file and paste it into your AI workflow as context.
-
-### 2. Import into a local skills directory
-
-If your agent environment supports local skills folders, copy the contents of the relevant `skills/` directory into your local skills path.
-
+**方式 1：Claude.ai 使用（推荐）**
 ```bash
-# Example: copy all skills from one collection
-cp -R agent-design/skills/* /path/to/your/local/skills/
+# 下载并解压到 Claude.ai 的 skills 目录
+git clone https://github.com/MedocMay/ai-native-builder-consultant-skills.git
+# 参考 Claude.ai 的 Skills 使用文档
 ```
 
-### 3. Use as a reference repo during product design
-
-Work through the skills in sequence and turn each output into a decision artifact for your product team.
-
-If you want the project-level method first, start with [CONSULTING-WORKFLOW.md](CONSULTING-WORKFLOW.md).  
-If you want standardized artifact names, see [TERMINOLOGY.md](TERMINOLOGY.md).  
-If you want ready-to-fill deliverables, open the [`templates/`](templates/) folder.
-
----
-
-## Recommended Path
-
-If you want the shortest practical route through the repository:
-
-```text
-ai-native-vs-ai-enhanced
-  → agent-boundary-design
-  → system-prompt-engineering
-  → human-in-the-loop-design
-  → knowledge-injection-strategy
-  → data-foundation
-  → agent-eval-framework
-  → tech-stack-selection
-  → launch-risk-review
-  → iteration-flywheel
+**方式 2：直接阅读使用**
+```bash
+git clone https://github.com/MedocMay/ai-native-builder-consultant-skills.git
+cd ai-native-builder-consultant-skills
+# 从 CONSULTING-WORKFLOW.md 开始读
 ```
 
-Use `multi-agent-orchestration` only when system complexity justifies it.
-
----
-
-## How to use these skills
-
-In tools that support local or imported skills, relevant skills may load automatically. You can also invoke them explicitly:
+### 使用流程
 
 ```
-Use the agent-boundary-design skill to help me design the scope of my document processing agent.
+1. 读 CONSULTING-WORKFLOW.md（整体咨询流程）
+2. 遇到具体问题时，找对应的 Skill 使用
+3. 从 scene-analysis 开始（所有 AI 项目的入口）
+4. 按 SOP 路径走，每一步都有对应的 Skill
 ```
 
-**Skills chain naturally.** A typical design session might flow:
+---
+
+## 核心设计原则
+
+**原则 1：整体以 AI Native Agent Builder 为主**
+大多数企业 AI 项目的核心是 Agent 范式。DL 小模型是场景驱动的补充。
+
+**原则 2：DL 由场景决定，不是必须**
+只有当输入是图像/文档图片/时序数据/语音时，才考虑 DL 小模型。
+
+**原则 3：大小模型连用是结论，不是前提**
+两个条件都满足才引入连用：① 有非结构化输入需要感知，② 感知结果需要被理解或生成。
+
+**原则 4：先问"该不该做"，再问"怎么做"**
+任何 AI 项目都要先过场景分析和伪需求检查。
+
+**原则 5：最小化原则**
+每次只验证一件事，第一版只做最小可用价值，成功标准可测量。
+
+---
+
+## SOP 总览
 
 ```
-agent-boundary-design → human-in-the-loop-design → system-prompt-engineering → agent-eval-framework
+┌─────────────────────────────────────────────────────────────┐
+│  阶段 0：前期诊断（必做，不可跳过）                          │
+│  · 场景分析与路径判断                                        │
+│  · 伪 AI 需求识别                                            │
+├─────────────────────────────────────────────────────────────┤
+│  阶段 1：需求定义                                            │
+│  · AI 项目定义卡                                             │
+│  · PRD Lite                                                │
+├─────────────────────────────────────────────────────────────┤
+│  阶段 2：技术设计与实施（按路径分叉）                         │
+│                                                             │
+│  Agent 主路径             DL 补充路径（场景驱动）            │
+│  · Agent 边界设计         · DL 数据策略                     │
+│  · 数据与 Eval 基础       · 模型选型与训练                   │
+│  · 技术选型与实施         · 部署与集成                       │
+│  · MVP 验证                                                 │
+├─────────────────────────────────────────────────────────────┤
+│  阶段 3：上线与持续改进                                      │
+│  · 上线风险评审                                              │
+│  · 迭代飞轮                                                  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Skills are designed for dialogue, not monologue.** Each skill will ask you clarifying questions — about your specific product, users, and constraints — before giving recommendations. Generic advice is useless. These skills are built to give you specific answers to your specific situation.
+完整 SOP：[CONSULTING-WORKFLOW.md](CONSULTING-WORKFLOW.md)
 
 ---
 
-## What makes this different
+## 完整 Skills 库一览
 
-Most skills repos encode *frameworks from books*. This one encodes *decisions made while shipping*.
+### 前期诊断（2）
+- [`scene-analysis`](pre-diagnosis/skills/scene-analysis/SKILL.md) — 场景分析与路径判断
+- [`pseudo-ai-detection`](pre-diagnosis/skills/pseudo-ai-detection/SKILL.md) — 伪 AI 需求识别
 
-Every skill in this repo is grounded in at least one real product decision with a real consequence:
+### 需求定义（3）
+- [`ai-project-definition`](requirement-definition/skills/ai-project-definition/SKILL.md) — AI 项目定义卡
+- [`prd-lite`](requirement-definition/skills/prd-lite/SKILL.md) — 最小产品文档
+- [`mvp-validation`](requirement-definition/skills/mvp-validation/SKILL.md) — MVP 验证三件套
 
-- A vertical-domain professional copilot built on OpenClaw-style workflows — shaped by thousands of real user interactions
-- The multi-channel agent platform (Shrimper) — connecting Feishu, DingTalk, WeCom, Telegram, Discord
-- Client projects: education data agents, digital human systems, enterprise SaaS pilots
+### 认知基础（4）
+- [`ai-native-vs-ai-enhanced`](mental-models/skills/ai-native-vs-ai-enhanced/SKILL.md) — AI Native vs AI-enhanced 判断
+- [`agent-loop-model`](mental-models/skills/agent-loop-model/SKILL.md) — Agent 机械运行模型
+- [`llm-capability-boundaries`](mental-models/skills/llm-capability-boundaries/SKILL.md) — 大模型能力边界
+- [`uncertainty-and-hallucination`](mental-models/skills/uncertainty-and-hallucination/SKILL.md) — 不确定性与幻觉
 
-When a skill says "this approach breaks in production," it's because it actually broke in production. When it says "this pattern builds user trust," it's because we measured it.
+### Agent 设计（7）
+- [`agent-boundary-design`](agent-design/skills/agent-boundary-design/SKILL.md) — Agent 边界设计（Zone A/B/C）
+- [`system-prompt-engineering`](agent-design/skills/system-prompt-engineering/SKILL.md) — SOUL 五层结构
+- [`human-in-the-loop-design`](agent-design/skills/human-in-the-loop-design/SKILL.md) — HITL 确认体验设计
+- [`knowledge-injection-strategy`](agent-design/skills/knowledge-injection-strategy/SKILL.md) — RAG vs Fine-tuning
+- [`ai-native-ux-patterns`](agent-design/skills/ai-native-ux-patterns/SKILL.md) — AI Native UX 模式
+- [`tech-stack-selection`](agent-design/skills/tech-stack-selection/SKILL.md) — 技术栈选型
+- [`trust-and-autonomy-tradeoff`](agent-design/skills/trust-and-autonomy-tradeoff/SKILL.md) — 信任与自主权权衡
 
-**This is not "best practices from the internet." This is what we learned the hard way.**
+### 构建技能（5）
+- [`data-foundation`](build-skills/skills/data-foundation/SKILL.md) — 数据基础与 Eval 设计
+- [`agent-eval-framework`](build-skills/skills/agent-eval-framework/SKILL.md) — Agent 评估框架
+- [`multi-agent-orchestration`](build-skills/skills/multi-agent-orchestration/SKILL.md) — 多 Agent 编排
+- [`launch-risk-review`](build-skills/skills/launch-risk-review/SKILL.md) — 上线风险评审
+- [`iteration-flywheel`](build-skills/skills/iteration-flywheel/SKILL.md) — 迭代飞轮设计
 
----
-
-## The philosophy
-
-Three principles guide every skill in this repo:
-
-**1. Decision first, explanation second.**
-Every skill starts from a decision you need to make. The framework exists to help you make that decision — not to teach you the topic comprehensively. If you want a textbook, there are better resources.
-
-**2. Specific beats general.**
-Skills ask about your product, your users, your constraints. The output should be a recommendation for *your situation*, not a generic framework you still have to translate.
-
-**3. Production is the test.**
-Demos lie. Skills are calibrated against production behavior — what actually breaks, what actually builds trust, what actually scales. If a pattern looks great in a demo but breaks in production, we say so explicitly.
-
----
-
-## 中文支持 | Chinese
-
-本 repo 的所有核心 Skills 提供中英双语版本。
-
-中文 AI 创业者面临的挑战和英文世界有交叉，但也有独特之处：合规要求（ICP、等保、数据本地化）、主流平台（飞书、钉钉、微信生态）、用户信任曲线（中国用户对 AI 产品的接受度和信任建立方式不同）。
-
-中文版 Skills 会在相关决策点融入这些本土化考量，而不是机械翻译。
-
----
-
-## Repository Map
-
-- `mental-models/`: foundational framing and capability boundaries
-- `agent-design/`: the core product and agent-design decisions
-- `build-skills/`: validation, launch, and iteration practices
-- `templates/`: ready-to-fill consulting deliverables
-- `CONSULTING-WORKFLOW.md`: project-level consulting sequence
-- `TERMINOLOGY.md`: naming and translation standard
+### DL 补充（7）
+- [`dl-problem-framing`](dl-skills/skills/dl-problem-framing/SKILL.md) — 三条路径决策
+- [`dl-data-strategy`](dl-skills/skills/dl-data-strategy/SKILL.md) — DL 数据策略
+- [`dl-model-selection`](dl-skills/skills/dl-model-selection/SKILL.md) — 模型选型（多框架）
+- [`dl-deployment-pattern`](dl-skills/skills/dl-deployment-pattern/SKILL.md) — 部署与大小模型集成
+- [`cv-pipeline`](dl-skills/skills/cv-pipeline/SKILL.md) — CV 全链条
+- [`ocr-pipeline`](dl-skills/skills/ocr-pipeline/SKILL.md) — OCR 全链条
+- [`ts-pipeline`](dl-skills/skills/ts-pipeline/SKILL.md) — 时序全链条
 
 ---
 
-## Status
+## 路径判断速查表
 
-This repo is early and growing. Current state:
-
-**Layer 2 — Design Decisions (agent-design plugin)**
-- [x] `agent-boundary-design` — complete
-- [x] `system-prompt-engineering` — complete
-- [x] `human-in-the-loop-design` — complete
-- [x] `knowledge-injection-strategy` — complete
-- [x] `ai-native-ux-patterns` — complete
-- [x] `tech-stack-selection` — complete
-- [x] `trust-and-autonomy-tradeoff` — complete
-
-**Layer 3 — Build Skills (build-skills plugin)**
-- [x] `data-foundation` — complete
-- [x] `agent-eval-framework` — complete
-- [x] `multi-agent-orchestration` — complete
-- [x] `launch-risk-review` — complete
-- [x] `iteration-flywheel` — complete
-
-**Layer 1 — Mental Models (mental-models plugin)**
-- [x] `ai-native-vs-ai-enhanced` — complete
-- [x] `agent-loop-model` — complete
-- [x] `llm-capability-boundaries` — complete
-- [x] `uncertainty-and-hallucination` — complete
-
-**The plan:** Each skill produces a named, signable deliverable — not a knowledge summary. In practice, the consulting system runs as a decision chain:
-
-```
-Positioning:
-ai-native-vs-ai-enhanced     → AI Positioning Statement
-
-Agent design:
-agent-boundary-design        → Agent Boundary Spec  ← start here
-system-prompt-engineering    → SOUL.md
-human-in-the-loop-design     → HITL Design Spec
-knowledge-injection-strategy → Knowledge Architecture Decision
-trust-and-autonomy-tradeoff  → Trust-Autonomy Calibration Plan
-
-Data and eval foundation:
-data-foundation              → Data Foundation Plan
-agent-eval-framework         → Eval Plan + Production Review Protocol
-
-Technical decision:
-tech-stack-selection         → Tech Stack Decision
-multi-agent-orchestration    → Multi-Agent Architecture Spec (if needed)
-
-Launch and iteration:
-launch-risk-review           → Launch Risk Review
-iteration-flywheel           → Flywheel Design (post-launch)
-```
-
-Some deliverables are mandatory, some are conditional, but the rule is consistent: each major decision becomes a document the client can review, sign off on, and operate from.
-
-You can find starter versions of those deliverables in the [`templates/`](templates/) folder.
+| 业务描述 | 推荐路径 | 入口 Skill |
+|---------|---------|-----------|
+| 对话、问答、知识检索 | Agent/RAG | `scene-analysis` |
+| 流程自动化、审批决策 | Agent/Workflow | `scene-analysis` |
+| 报告生成、内容创作 | Agent/LLM | `scene-analysis` |
+| 图像识别、缺陷检测 | DL-CV | `dl-problem-framing` |
+| 票据识别、文档提取 | DL-OCR | `dl-problem-framing` |
+| 传感器异常、成本预测 | DL-TS | `dl-problem-framing` |
+| 语音识别、录音分析 | DL-Speech | `dl-problem-framing` |
+| 质检+原因分析 | DL + Agent（连用） | `scene-analysis` |
+| 固定报表、数据统计 | 不需要 AI | 直接写代码 |
+| 流程混乱、数据不干净 | 非 AI 优先 | `pseudo-ai-detection` |
 
 ---
 
-## Contributing
+## 适合谁用
 
-If you've built an AI Native product and have a decision framework worth sharing — open an issue. The bar is: must be grounded in production experience, must answer a specific decision (not explain a concept), must have seen the failure modes as well as the successes.
+**适合：**
+- 正在决定要不要做某个 AI 项目的技术负责人
+- 需要给业务方解释"为什么这个需求不适合做 AI"的产品经理
+- 第一次构建 Agent 架构的工程师
+- 想要规范企业内部 AI 咨询流程的团队
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+**不太适合：**
+- 寻找"AI 提示词技巧"的用户
+- 需要填空式模板就能解决问题的场景
+- 还没决定要做 AI 的观望者
 
 ---
 
-## License
+## 贡献
 
-Apache 2.0. Use freely. Attribution appreciated.
+欢迎提交 PR 和 Issue！详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+**贡献方向：**
+- 补充新的 Skill（特别是垂直行业场景）
+- 改进现有 Skill（增加真实案例、修正错误）
+- 翻译（英文/日文等）
+- 添加术语表和交叉引用
 
 ---
 
-*Built by [Medoc May](https://github.com/MedocMay/ai-native-builder-consultant-skills) — a founder who spent two years making every mistake in this repo so you don't have to.*
+## 致谢
+
+本 Skills 库整合了多个来源的产业实践经验：
+
+- **Agent 范式基础** — 基于 OpenClaw 等 AI Agent 框架的实际项目经验
+- **DL 落地范式** — 参考 PaddlePaddle PaddleX 全链条开发范式
+- **前期诊断工具** — 来自企业内训工作坊实践
+- **大小模型连用** — 来自真实工业质检、财务分析等场景
+
+特别感谢所有在真实项目中踩过坑、积累过经验的从业者。本仓库是这些经验的系统化总结。
+
+---
+
+## 许可证
+
+[Apache License 2.0](LICENSE)
+
+你可以自由使用、修改、商用本仓库内容，只需保留署名。
+
+---
+
+_Last updated: 2026-04-13 | Version: v3.0_

@@ -1,76 +1,151 @@
-# Contributing to AI Native Builder Consultant Skills
+# 贡献指南
 
-**Maintainer:** [Medoc May](https://github.com/MedocMay/ai-native-builder-consultant-skills)
+感谢你对 AI Native Builder Consultant Skills 项目的关注！本文档说明如何向本项目贡献内容。
 
+---
 
-## The Bar
+## 贡献类型
 
-Every skill in this repo is grounded in production experience. The contribution bar reflects that:
+### 1. 新增 Skill
 
-- **Must come from production** — things you built, shipped, and observed breaking or working in front of real users. Research papers and second-hand accounts don't qualify.
-- **Must answer a specific decision** — not "explain a concept" but "help someone decide X." Every skill is a decision framework, not a knowledge article.
-- **Must have seen the failure modes** — if you've only seen the success case, the skill is incomplete. What goes wrong, under what conditions, and how do you catch it?
+如果你在实际项目中积累了有价值的决策框架或工作流，欢迎贡献为新的 Skill。
 
-## Skill Format
+**一个好的 Skill 应该：**
+- 解决一个具体的决策问题（不是笼统的"如何做好 AI"）
+- 有明确的使用时机（什么情况下应该用）
+- 有可执行的框架（能指导人做出判断）
+- 包含反模式（常见错误和如何避免）
+- 最好有真实案例（隐去敏感信息即可）
 
-Every skill must follow the standard structure:
+### 2. 改进现有 Skill
+
+包括：
+- 补充新的决策维度
+- 增加实际案例
+- 修正过时或错误的内容
+- 改善表达清晰度
+
+### 3. 翻译
+
+目前主要是中文版本，欢迎翻译到英文、日文等语言。
+
+### 4. 文档改进
+
+- 改进 README、SOP 等顶层文档
+- 添加交叉引用
+- 增加术语表
+
+---
+
+## Skill 文件规范
+
+每个 Skill 是一个独立的 Markdown 文件，遵循以下结构：
 
 ```markdown
 ---
 name: skill-name-in-kebab-case
-description: One sentence, under 250 characters, front-loaded with trigger keywords.
+description: 一段话描述这个 Skill 解决什么问题、什么时候使用。这段话应该足够清晰，让人一读就知道是否需要使用此 Skill。
 ---
 
-# Skill Title
+# Skill Name — 中文名
 
-## When to Use
-[Specific situations / trigger phrases that indicate this skill is needed]
+## 咨询链位置
 
-## Ask These Questions First
-[3–5 questions to gather context before giving recommendations]
+**在 SOP 中：** [哪个阶段/模块]
+**触发条件：** [什么情况下启动此 Skill]
+**常见联动：** [与其他 Skill 的关系]
 
-## Decision Framework
-[The actual framework — scored rubrics, decision trees, trade-off tables]
+## 核心框架 / 核心问题
 
-## Output Format
-[What the skill produces — a spec, a scored table, a one-pager, a recommendation]
+[Skill 的核心方法论部分]
+
+## 输出格式
+
+```markdown
+[这个 Skill 的标准产出模板]
+```
+
+## 反模式
+
+[常见错误和如何避免]
+```
+
+**YAML frontmatter 规范：**
+- `name` — 使用 kebab-case，不含空格和特殊字符
+- `description` — 一段话描述，不要写 Markdown 格式化，单纯文字
 
 ---
-[Supporting content: worked examples, anti-patterns, related skills]
-```
 
-**Description field:** Under 250 characters. Claude uses this to decide whether to trigger the skill — longer descriptions get truncated. Front-load the trigger keywords (the words someone would say when they need this skill).
+## 提交流程
 
-## What We Don't Accept
+1. **Fork 本仓库**
+2. **创建分支**：`git checkout -b add-skill/your-skill-name`
+3. **添加内容**：在对应目录下创建 Skill 文件夹和 `SKILL.md`
+4. **更新 SOP**：如果新 Skill 在咨询流程中有明确位置，更新 `CONSULTING-WORKFLOW.md`
+5. **更新 README**：在 Skills 库一览中添加链接
+6. **提交 PR**：说明这个 Skill 的来源、解决什么问题、与现有 Skills 的关系
 
-- Generic "best practices" with no production grounding
-- Concept explainers with no decision output
-- Skill descriptions over 250 characters
-- Skills that duplicate existing coverage without meaningfully extending it
-- Content that reveals confidential product data, user data, or internal metrics from any specific company
+---
 
-## Process
+## 目录归属建议
 
-1. **Open an issue first** for new skills — describe the decision it answers and the production experience behind it. Wait for a thumbs-up before writing the full skill.
-2. **PRs for fixes** (typos, factual corrections, format issues) — open directly, no issue needed.
-3. **One skill per PR.** Keep changes focused.
-4. **Run a self-check** before submitting:
-   - Does it have all four required sections?
-   - Is the description under 250 characters?
-   - Does it say something that can't be found in a generic AI article?
-   - Has someone actually built this and seen it fail?
+新增 Skill 时，按以下原则选择目录：
 
-## Format Validation
+| 目录 | 适合内容 |
+|------|---------|
+| `pre-diagnosis/skills/` | 需求诊断、场景判断、可行性分析 |
+| `requirement-definition/skills/` | 需求定义、产品文档、MVP 设计 |
+| `mental-models/skills/` | 基础概念、心智模型、范式判断 |
+| `agent-design/skills/` | Agent 架构、边界、SOUL、UX |
+| `build-skills/skills/` | 数据、评估、多 Agent、上线、飞轮 |
+| `dl-skills/skills/` | CV/OCR/时序/语音等 DL 落地 |
 
-Check your YAML frontmatter is valid:
+如果无法明确归属，可以在 PR 中讨论。
 
-```bash
-# Quick check — should print name and description cleanly
-head -5 your-skill/SKILL.md
-```
+---
 
-The `name` field must match the directory name exactly.
+## 写作风格建议
 
-## License
+**语言风格：**
+- 直接、简洁，避免"赋能""智能化""ChatGPT 时代"等空洞词汇
+- 用具体例子替代抽象描述
+- 多用表格和列表，少用长段落
+- 中文为主，必要时保留英文术语（如 Zone A/B/C、HITL 等）
 
-By contributing, you agree your contribution is licensed under Apache 2.0 and that Medoc May retains the right to include your contribution in this repository. See [LICENSE](LICENSE).
+**内容要求：**
+- 基于真实项目经验，不编造案例
+- 客观中立，不为特定产品或框架站台
+- 注明局限性（这个 Skill 不适用于哪些场景）
+- 强调反模式（防止滥用比鼓励使用更重要）
+
+---
+
+## 审核标准
+
+PR 会按以下标准审核：
+
+1. **独特性** — 是否与现有 Skill 有实质性区别
+2. **实用性** — 是否解决真实问题，不是理论探讨
+3. **结构性** — 是否符合 Skill 文件规范
+4. **清晰度** — 是否能被独立阅读和使用
+5. **完整性** — 是否包含框架、输出格式、反模式
+
+---
+
+## 讨论和协作
+
+- **Issue** — 提出问题、建议新 Skill、报告错误
+- **Discussion** — 讨论 SOP 的演进方向
+- **PR** — 具体贡献
+
+---
+
+## 署名
+
+贡献者将在 CHANGELOG 和相关 Skill 文件中得到署名。
+
+如果你希望匿名贡献或使用特定的署名方式，请在 PR 中说明。
+
+---
+
+感谢你的贡献！

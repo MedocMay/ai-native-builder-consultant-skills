@@ -1,88 +1,180 @@
-# Terminology
+# 术语表
 
-This glossary standardizes the main consulting and delivery terms used in this repository.
-
----
-
-## Core Terms
-
-**AI Native**  
-A product whose core value depends on AI behavior, not just AI augmentation of an existing workflow.
-
-**AI-enhanced**  
-A product where AI improves an existing workflow, but the product still fundamentally exists without the model.
-
-**Agent**  
-A system that perceives state, reasons over it, takes action, and observes outcomes over time.
-
-**SOUL**  
-The production system-prompt constitution for an agent. It defines role, objective, constraints, and behavior under pressure.
-
-**HITL**  
-Human-in-the-loop. The confirmation and intervention layer between agent behavior and consequential action.
-
-**Zone A / Zone B / Zone C**  
-The trust and action boundary model.
-- Zone A: autonomous execution
-- Zone B: human confirmation required
-- Zone C: forced escalation or refusal
-
-**Vibe Check**  
-A small manual test set used to catch obvious regressions quickly.
-
-**Golden Dataset**  
-A curated eval set used for more stable regression testing and release decisions.
-
-**Production Signals**  
-Real-world behavioral metrics from live usage, such as override rate, trigger rate, error rate, and business outcomes.
-
-**Iteration Flywheel**  
-The ongoing loop of production data, review, root-cause analysis, validated change, deployment, and monitoring.
+本文档解释本仓库中使用的核心术语，避免歧义。
 
 ---
 
-## Standard Deliverable Names
+## Agent 范式术语
 
-Use these names consistently across English and Chinese materials.
+### Agent（智能体）
+有自主决策能力、能在一定边界内自主执行任务的 AI 系统。与简单的"LLM 调用"区别：Agent 有状态、有工具、有目标、有边界。
 
-| English | Chinese |
-|--------|---------|
-| AI Positioning Statement | AI 产品定位声明 |
-| Agent Boundary Spec | Agent Boundary Spec |
-| SOUL.md | SOUL.md |
-| HITL Design Spec | HITL Design Spec |
-| Knowledge Architecture Decision | 知识架构决策 |
-| Trust-Autonomy Calibration Plan | 信任-自治校准计划 |
-| Data Foundation Plan | 数据基础计划 |
-| Eval Plan + Production Review Protocol | Eval 计划 + 每周 Production Review 议程 |
-| Tech Stack Decision | 技术栈决策 |
-| Multi-Agent Architecture Spec | 多 Agent 架构 Spec |
-| Build / Rollout Plan | 实施 / 推进计划 |
-| Launch Risk Review | Launch Risk Review |
-| Iteration Flywheel Design | 迭代飞轮设计 |
-| Weekly Production Review | 每周 Production Review |
+### Agent Builder
+构建 Agent 的工具或平台（如 AgentBuilder、OpenClaw 等）。本仓库中泛指 Agent 产品的构建过程。
+
+### Zone A / B / C（信任区）
+Agent 的三种行为区域：
+- **Zone A** — 自主执行，无需人工介入（高信任）
+- **Zone B** — AI 草稿，人工确认后执行（中信任）
+- **Zone C** — 拒绝执行，强制人工（无信任）
+
+### SOUL
+Agent 的运营宪法。通常是一个 Markdown 文件，包含五层结构：
+1. Identity（身份）
+2. Relationship（关系）
+3. Capabilities（能力边界）
+4. Constraints（约束）
+5. Behavioral Rules（行为规则）
+
+### HITL（Human-in-the-Loop）
+人机协作模式。Agent 在关键节点请求人工确认，不完全自主执行。
+
+### Job Story
+描述 Agent 工作场景的结构化句式：
+> 当 [情境]，我希望 Agent 完成 [动作]，这样我可以 [结果]。
+
+### 搭档 vs 助理（Partner vs Assistant）
+两种 Agent 身份定位：
+- **搭档** — 有观点、主动提醒、敢于说"等一下"
+- **助理** — 被动响应、执行指令、不表达意见
+
+### 飞轮（Flywheel）
+上线后的持续改进循环：生产数据 → 问题识别 → 假设修复 → eval 验证 → 部署 → 监控 → 新数据。
 
 ---
 
-## Translation Guidance
+## DL 范式术语
 
-These terms should usually remain in English:
-- Agent
-- SOUL
-- HITL
-- Zone A / B / C
-- Eval
-- Launch Risk Review
-- Production Review
+### DL 小模型
+专用深度学习模型，针对特定任务训练（如目标检测、OCR、时序预测）。特点：速度快、成本低、输出结构化。
 
-These terms can be translated naturally into Chinese:
-- positioning
-- boundary
-- knowledge architecture
-- rollout
-- flywheel
+### 大模型（LLM/VLM）
+大语言模型或视觉语言模型（如 GPT-4、文心、Qwen、通义千问）。特点：能理解自然语言、能推理和生成、成本高。
 
-When in doubt:
-- keep the deliverable title stable
-- explain it in the surrounding language
-- avoid creating multiple Chinese names for the same artifact
+### 大小模型连用
+一种架构模式：小模型做感知（识别/检测），大模型做理解（分析/生成）。不是架构预设，而是场景驱动的结论。
+
+### PaddleX
+百度开源的低代码深度学习开发平台，支持 CV/OCR/时序等全链条任务。
+
+### 预训练模型（Pre-trained Model）
+在大规模通用数据集上训练好的模型，可以直接使用或在此基础上微调。
+
+### 微调（Fine-tuning）
+在预训练模型基础上，用业务数据继续训练，使模型适应特定场景。
+
+### 冷启动（Cold Start）
+项目初期没有标注数据的困境。解决方案：先用预训练模型建立基线，再逐步积累标注。
+
+### 分布偏移（Distribution Shift）
+生产数据与训练数据的分布不一致。DL 系统随时间推移常见的失败模式。
+
+### check_dataset
+PaddleX 的数据集校验命令，训练前必须通过的格式检查。
+
+---
+
+## 咨询流程术语
+
+### MVP（Minimum Viable Product）
+最小可用产品。第一版只做最小的、能验证核心价值的功能子集。
+
+### Vibe Coding
+用 AI 辅助快速写代码的方式。对于规则清晰、逻辑简单的场景，Vibe Coding 比上 AI Agent 更快更稳。
+
+### 伪 AI 需求
+看起来像 AI 项目但实际上不适合做 AI 的需求。常见类型：
+- 没有明确用户和任务
+- 写得像愿景而非项目
+- 更像流程或数据治理问题
+- 规则完全可描述的场景
+
+### PRD Lite
+最小产品文档。比项目定义卡更结构化，比完整 PRD 更轻量。
+
+### Go / No-Go / Conditional Go
+上线评审的三种结论：
+- **Go** — 所有关键项通过
+- **No-Go** — 有关键问题未解决
+- **Conditional Go** — 非关键项有遗留但有 owner 和 deadline
+
+### Golden Dataset
+用于回归测试的固定数据集。每次模型或 Prompt 变更后在此评估，确保不退化。
+
+### Vibe Check
+小样本快速测试（通常 20 个案例）。用于快速判断模型或 Prompt 的基本表现。
+
+---
+
+## 硬件术语
+
+### GPU（Graphics Processing Unit）
+图形处理器。深度学习训练和推理的主流硬件。NVIDIA A100/V100/T4 等。
+
+### NPU（Neural Processing Unit）
+神经网络处理器。华为昇腾等国产芯片。
+
+### XPU
+昆仑芯的 AI 加速芯片。
+
+### 高性能推理
+对模型推理做深度优化（量化、算子融合、硬件加速），追求极致速度。
+
+### 服务化部署
+将模型封装为 API 服务，供多个客户端调用。
+
+### 端侧部署
+将模型部署到终端设备（手机、工控机、摄像头），不依赖云端。
+
+### INT8 量化
+把模型权重从 FP32 压缩到 INT8 格式，模型体积减小 4 倍，推理速度提升 2-4 倍。
+
+---
+
+## 评估指标术语
+
+### Precision（精确率）
+预测为正例中实际为正例的比例。"不要误报"。
+
+### Recall（召回率）
+实际为正例中被预测为正例的比例。"不要漏报"。
+
+### F1 Score
+Precision 和 Recall 的调和平均数。综合评估指标。
+
+### mAP（mean Average Precision）
+目标检测的主要指标。
+
+### mIoU（mean Intersection over Union）
+语义分割的主要指标。
+
+### MAPE（Mean Absolute Percentage Error）
+时序预测的业务指标。预测值与真实值的百分比误差。
+
+### MSE / MAE
+均方误差 / 平均绝对误差。时序预测的技术指标。
+
+---
+
+## 其他术语
+
+### 护城河（Moat）
+产品的可持续竞争优势。在 AI Native 产品中，通常来自：
+- 独特的数据
+- 特定领域的专家知识
+- 网络效应
+- 品牌和信任
+
+不是来自：
+- 模型本身（模型会商品化）
+- 技术实现（可以被复制）
+
+### 卡点 / 依赖（Dependency）
+项目推进的前置条件。硬依赖（没有就不能继续）vs 软依赖（有了更好）。
+
+### 影子模式（Shadow Mode）
+新模型/系统并行于旧系统运行，不直接影响生产，用于积累对比数据。
+
+---
+
+欢迎补充！有不清楚的术语可以提 Issue。
