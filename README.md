@@ -6,6 +6,22 @@
 [![Skills](https://img.shields.io/badge/Skills-28-orange?style=flat-square)](./ai-native-builder-consultant-skills/README.md#完整-skills-库一览)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](./ai-native-builder-consultant-skills/LICENSE)
 
+## 中文摘要
+
+这是一个面向中文 AI Native 产品团队的咨询型 Skills 仓库，目标不是教人“怎么用 AI”，而是帮助团队判断“这个需求该不该做 AI、该走 Agent 还是 DL、第一版应该做到哪里、上线前后怎么验证和迭代”。
+
+仓库内容覆盖从前期诊断、需求定义、Agent 设计、数据与 Eval、技术选型、上线风险评审到迭代飞轮的完整路径，适合技术负责人、产品经理、AI 咨询顾问和企业内训场景直接使用。
+
+如果你是第一次进入这个仓库，建议先看 [`CONSULTING-WORKFLOW.md`](./ai-native-builder-consultant-skills/CONSULTING-WORKFLOW.md)，再根据具体问题跳转到对应 Skill。
+
+## 版本迭代简表
+
+| 版本 | 核心变化 | 关键词 |
+|------|----------|--------|
+| `v1.0` | 首版发布，建立 Agent 咨询主框架与 16 个基础 Skills | Agent 范式、6 模块 SOP |
+| `v2.0` | 引入 DL 补充路径，覆盖 CV/OCR/时序等非结构化输入场景 | DL 落地、大小模型连用 |
+| `v3.0` | 重构为三阶段九模块，新增前期诊断与需求定义，把咨询入口前移 | 场景分析、伪 AI 识别、项目定义、PRD Lite |
+
 ## v3 更新亮点
 
 - 从 16 个 Skills 扩展到 **28 个 Skills**，新增前期诊断、需求定义和 DL 补充路径。
