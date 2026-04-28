@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1419"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <radialGradient id="amberGlow" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e6edf3" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#amberGlow)"/>
+  <line x1="80" y1="120" x2="120" y2="120" stroke="#d97706" stroke-width="1.5"/>
+  <text x="135" y="125" font-family="JetBrains Mono, monospace" font-size="14" fill="#d97706" font-weight="600" letter-spacing="3">CONSULTANT SKILLS LIBRARY · 2026</text>
+  <text x="80" y="240" font-family="Fraunces, Georgia, serif" font-size="100" fill="#e6edf3" font-weight="300" letter-spacing="-3">为<tspan fill="#d97706" font-style="italic"> 建造者 </tspan>而写的</text>
+  <text x="80" y="350" font-family="Fraunces, Georgia, serif" font-size="100" fill="#e6edf3" font-weight="300" letter-spacing="-3">AI 产品咨询系统</text>
+  <text x="80" y="430" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="26" fill="#7d8590" font-weight="300">28 个经过产业实践验证的决策框架</text>
+  <g transform="translate(80, 490)">
+    <text font-family="Fraunces, Georgia, serif" font-size="48" fill="#e6edf3" font-weight="300" letter-spacing="-2">28</text>
+    <text x="65" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#7d8590" letter-spacing="2">SKILLS</text>
+    <text x="200" font-family="Fraunces, Georgia, serif" font-size="48" fill="#e6edf3" font-weight="300" letter-spacing="-2">9</text>
+    <text x="245" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#7d8590" letter-spacing="2">MODULES</text>
+    <text x="380" font-family="Fraunces, Georgia, serif" font-size="48" fill="#e6edf3" font-weight="300" letter-spacing="-2">3</text>
+    <text x="425" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#7d8590" letter-spacing="2">STAGES</text>
+    <text x="560" font-family="Fraunces, Georgia, serif" font-size="48" fill="#d97706" font-weight="300" letter-spacing="-2" font-style="italic">7.4k</text>
+    <text x="660" y="0" font-family="JetBrains Mono, monospace" font-size="12" fill="#7d8590" letter-spacing="2">LINES</text>
+  </g>
+  <g transform="translate(1120, 580)" text-anchor="end">
+    <text font-family="Fraunces, Georgia, serif" font-style="italic" font-size="22" fill="#e6edf3">AI Native <tspan fill="#d97706" font-style="normal">/</tspan> Builder</text>
+  </g>
+  <text x="80" y="595" font-family="JetBrains Mono, monospace" font-size="11" fill="#484f58" letter-spacing="2">v3.0 · APACHE LICENSE 2.0</text>
+</svg>

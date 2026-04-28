@@ -4,6 +4,31 @@
 
 ---
 
+## [v3.1] - 2026-04 · 前端发布版
+
+### 新增
+- **三个交互式前端界面**（在 `docs/` 目录，可直接部署到 GitHub Pages）
+  - `index.html` — 统一入口页，让用户从三个界面中选择
+  - `chat.html` — 快速咨询（chatbot 形式 + 4 个 a16z 经典 AI Native 场景 + 悬赏 + 提示词模板/增强器 + 时间轴 + 会话历史 + 分享卡片）
+  - `explore.html` — 编辑刊物风格的 skills 浏览器
+  - `workbench.html` — 类 Claude Code 桌面版工作台
+- **真实 Claude API 后端对接**（chat.html 的 LIVE 模式）
+  - DEMO / LIVE 双模式切换
+  - API Key 配置弹窗（localStorage 保存）
+  - Skills 按当前 SOP 阶段自动注入 system prompt
+  - 流式响应（SSE 解析）
+  - Token / 成本追踪
+  - 错误处理与 fallback
+- **DEPLOY.md 部署指南** — 5 分钟部署到 GitHub Pages 的完整流程，包括自定义品牌、升级为后端代理、嵌入 iframe 等
+- **examples/ 目录** — 包含一个真实咨询案例（材料成本分析系统）的 5 个脱敏交付物
+- **OG 分享图** — `docs/assets/og-image.svg`
+
+### 改动
+- README 新增"在线体验"和"仓库结构"两个 section
+- skills/ 目录扁平化（去掉中间的 `/skills/` 一层）
+
+---
+
 ## [v3.0] - 2026-04-13
 
 ### 新增
@@ -56,12 +81,6 @@
   - Agent 设计（7个）
   - 构建技能（5个）
 - **六模块 SOP**
-  - Module 1 产品定位诊断
-  - Module 2 Agent 边界设计
-  - Module 3 数据与 Eval 基础
-  - Module 4 技术选型与实施计划
-  - Module 5 上线风险评审
-  - Module 6 迭代飞轮
 
 ---
 

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Native / Builder · 为建造者而写的 AI 产品咨询系统</title>
+<meta name="description" content="28 个经过产业实践验证的决策框架。从场景诊断到上线飞轮，覆盖 AI Native Agent 与深度学习落地的全链条。Apache 2.0 开源。">
+<meta property="og:title" content="AI Native / Builder">
+<meta property="og:description" content="为建造者而写的 AI 产品咨询系统 · 28 skills · 9 modules · 3 stages">
+<meta property="og:image" content="./assets/og-image.svg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1419;
+  --bg-panel: #161b22;
+  --bg-elevated: #1c2128;
+  --bg-hover: #22272e;
+  --border: #30363d;
+  --border-soft: #21262d;
+  --text: #e6edf3;
+  --text-dim: #7d8590;
+  --text-faint: #484f58;
+  --amber: #d97706;
+  --amber-bright: #f59e0b;
+  --amber-soft: rgba(217, 119, 6, 0.12);
+  --sage: #7d9473;
+  --rust: #c17855;
+  --serif: 'Fraunces', 'Noto Sans SC', Georgia, serif;
+  --sans: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at top right, rgba(217, 119, 6, 0.06), transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(125, 148, 115, 0.04), transparent 50%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(230, 237, 243, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 237, 243, 0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.logo span { color: var(--amber); font-style: normal; }
+.header-meta {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+.header-meta a {
+  color: var(--text-dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.header-meta a:hover { color: var(--amber-bright); }
+.header-meta .live::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-right: 6px;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+
+.hero {
+  margin-bottom: 80px;
+  max-width: 920px;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 32px; height: 1px; background: var(--amber);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+}
+.hero-title .italic {
+  font-style: italic;
+  color: var(--amber);
+}
+.hero-tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 720px;
+  line-height: 1.45;
+  margin-bottom: 36px;
+}
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+.hero-stats strong {
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text);
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+.entries-section { margin-bottom: 80px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: ''; width: 24px; height: 1px; background: var(--text-faint);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  line-height: 1.15;
+}
+.section-title .italic { font-style: italic; color: var(--amber); }
+
+.entries {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 16px;
+}
+
+.entry {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 32px 28px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+.entry:hover {
+  background: var(--bg-elevated);
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+.entry::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.entry:hover::before { transform: scaleX(1); }
+.entry.featured {
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-panel) 100%);
+  border-color: var(--amber);
+}
+.entry.featured::before { transform: scaleX(1); }
+.entry.featured::after {
+  content: '推荐入口';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  background: var(--bg);
+  padding: 3px 8px;
+  border: 1px solid var(--amber);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.entry-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.entry-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.entry-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.entry.featured .entry-title { font-size: 36px; }
+.entry-title .italic { font-style: italic; color: var(--amber); }
+.entry-desc {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.entry-features {
+  list-style: none;
+  margin-bottom: 24px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+.entry-features li {
+  padding: 4px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.entry-features li::before {
+  content: '·';
+  color: var(--amber);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.entry-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--amber);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+  transition: gap 0.2s;
+}
+.entry:hover .entry-cta { gap: 14px; }
+
+.sop-section { margin-bottom: 80px; }
+.sop-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.sop-stage {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border-soft);
+  position: relative;
+}
+.sop-stage:last-child { border-right: none; }
+.sop-stage-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.sop-stage-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.sop-stage-modules {
+  list-style: none;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.sop-stage-modules li {
+  padding: 3px 0;
+  display: flex;
+  gap: 6px;
+}
+.sop-stage-modules li::before {
+  content: '·';
+  color: var(--amber);
+}
+
+.principles-section { margin-bottom: 80px; }
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.principle {
+  padding: 28px 28px 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+.principle-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.principle-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.principle-body {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.footer {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.footer-brand {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+}
+.footer-links a {
+  color: var(--text-faint);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--amber-bright); }
+
+@media (max-width: 900px) {
+  .container { padding: 40px 20px 60px; }
+  .header { flex-direction: column; gap: 16px; align-items: flex-start; margin-bottom: 48px; }
+  .hero { margin-bottom: 48px; }
+  .hero-stats { flex-wrap: wrap; gap: 16px; }
+  .entries { grid-template-columns: 1fr; }
+  .sop-flow { grid-template-columns: 1fr; }
+  .sop-stage { border-right: none; border-bottom: 1px solid var(--border-soft); }
+  .sop-stage:last-child { border-bottom: none; }
+  .principles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="logo">AI Native <span>/</span> Builder</div>
+    <div class="header-meta">
+      <span class="live">v3.1 · LIVE</span>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+      <span>APACHE 2.0</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Consultant Skills Library · 2026</div>
+    <h1 class="hero-title">
+      为 <span class="italic">建造者</span> 而写的<br>
+      AI 产品咨询系统
+    </h1>
+    <p class="hero-tagline">
+      28 个经过产业实践验证的决策框架。从场景诊断到上线飞轮，覆盖 AI Native Agent 与深度学习落地的全链条。
+    </p>
+    <div class="hero-stats">
+      <span><strong>28</strong>SKILLS</span>
+      <span><strong>9</strong>MODULES</span>
+      <span><strong>3</strong>STAGES</span>
+      <span><strong>7.4k</strong>LINES</span>
+    </div>
+  </section>
+
+  <section class="entries-section">
+    <div class="section-label">Choose your entry · 三个界面</div>
+    <h2 class="section-title">
+      你想<span class="italic">怎么开始</span>？
+    </h2>
+
+    <div class="entries">
+      <a href="./chat.html" class="entry featured">
+        <div class="entry-num">01 / 03</div>
+        <div class="entry-tag">▸ 推荐 · QUICK CONSULT</div>
+        <h3 class="entry-title">快速 <span class="italic">咨询</span></h3>
+        <p class="entry-desc">
+          像和真实顾问对话一样，3 分钟跑完场景分析 → 项目定义 → Agent 边界的核心咨询路径。结尾可悬赏支持。
+        </p>
+        <ul class="entry-features">
+          <li>4 个 a16z 经典 AI Native 场景一键启动</li>
+          <li>5 个结构化 prompt 模板 + 提示词增强器</li>
+          <li>左侧 SOP 进度状态机实时同步</li>
+          <li>支持接入真实 Claude API（DEMO / LIVE 双模式）</li>
+          <li>会话历史 · 时间轴 · 分享卡片</li>
+        </ul>
+        <span class="entry-cta">开始咨询 →</span>
+      </a>
+
+      <a href="./explore.html" class="entry">
+        <div class="entry-num">02 / 03</div>
+        <div class="entry-tag">▸ EXPLORER</div>
+        <h3 class="entry-title">浏览 <span class="italic">全部</span></h3>
+        <p class="entry-desc">
+          编辑刊物风格的 skills 浏览器。28 个决策框架按分类筛选，可逐个深入阅读完整 markdown 内容。
+        </p>
+        <ul class="entry-features">
+          <li>6 大分类 + 实时关键词搜索</li>
+          <li>SOP 三阶段全景图</li>
+          <li>每个 skill 完整 markdown 阅读</li>
+          <li>适合学习、参考、引用</li>
+        </ul>
+        <span class="entry-cta">浏览 skills →</span>
+      </a>
+
+      <a href="./workbench.html" class="entry">
+        <div class="entry-num">03 / 03</div>
+        <div class="entry-tag">▸ WORKBENCH</div>
+        <h3 class="entry-title">工作 <span class="italic">台</span></h3>
+        <p class="entry-desc">
+          类似 Claude Code 桌面版的操作台。左侧目录树展开所有 skills，主区域可加载任一 skill 进入对话。
+        </p>
+        <ul class="entry-features">
+          <li>侧边栏完整 skills 目录</li>
+          <li>每个 skill 可折叠展开完整文档</li>
+          <li>键盘快捷键 ⌘K 快速搜索</li>
+          <li>适合咨询师/工程师日常使用</li>
+        </ul>
+        <span class="entry-cta">进入工作台 →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sop-section">
+    <div class="section-label">Standard Operating Procedure</div>
+    <h2 class="section-title">
+      三阶段，<span class="italic">九模块</span>，<br>
+      从场景到飞轮的完整闭环
+    </h2>
+
+    <div class="sop-flow">
+      <div class="sop-stage">
+        <div class="sop-stage-num">STAGE 0</div>
+        <div class="sop-stage-title">前期诊断</div>
+        <ul class="sop-stage-modules">
+          <li>场景分析与路径判断</li>
+          <li>伪 AI 需求识别</li>
+        </ul>
+      </div>
+      <div class="sop-stage">
+        <div class="sop-stage-num">STAGE 1</div>
+        <div class="sop-stage-title">需求定义</div>
+        <ul class="sop-stage-modules">
+          <li>AI 项目定义卡</li>
+          <li>PRD Lite</li>
+        </ul>
+      </div>
+      <div class="sop-stage">
+        <div class="sop-stage-num">STAGE 2</div>
+        <div class="sop-stage-title">技术设计</div>
+        <ul class="sop-stage-modules">
+          <li>Agent 边界 · SOUL · HITL</li>
+          <li>数据基础 · 评估</li>
+          <li>技术选型 / MVP 验证</li>
+        </ul>
+      </div>
+      <div class="sop-stage">
+        <div class="sop-stage-num">STAGE 3</div>
+        <div class="sop-stage-title">上线与飞轮</div>
+        <ul class="sop-stage-modules">
+          <li>上线风险评审</li>
+          <li>迭代飞轮</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="section-label">Core Design Principles</div>
+    <h2 class="section-title">
+      <span class="italic">六条原则</span>，覆盖所有判断
+    </h2>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <div class="principle-title">Agent Builder 为主</div>
+        <p class="principle-body">大多数企业 AI 项目核心是 Agent 范式，DL 是场景驱动的可选补充，不是必须。</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <div class="principle-title">DL 由场景决定</div>
+        <p class="principle-body">只有当输入是图像/文档图片/时序数据/语音时，才考虑 DL 小模型。</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <div class="principle-title">大小模型连用是结论</div>
+        <p class="principle-body">连用是场景驱动的结论，不是架构预设。两个条件都满足才引入。</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <div class="principle-title">先问"该不该做"</div>
+        <p class="principle-body">任何 AI 项目都要先过场景分析和伪需求检查，防止在错误需求上浪费资源。</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">05</div>
+        <div class="principle-title">最小化原则</div>
+        <p class="principle-body">每次只验证一件事，第一版只做最小可用价值，成功标准可以被测量。</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">06</div>
+        <div class="principle-title">开源可贡献</div>
+        <p class="principle-body">Apache 2.0 协议。每个 skill 是独立 markdown，欢迎 PR 补充行业场景与决策框架。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <div class="footer-brand">AI Native / Builder · v3.1</div>
+      <div style="margin-top: 4px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;">
+        BUILT WITH INTENT · APACHE LICENSE 2.0
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="../README.md">README</a>
+      <a href="../CONSULTING-WORKFLOW.md">SOP</a>
+      <a href="../CONTRIBUTING.md">CONTRIBUTING</a>
+      <a href="../TERMINOLOGY.md">TERMINOLOGY</a>
+      <a href="../CHANGELOG.md">CHANGELOG</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
